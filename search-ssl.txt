@@ -1,0 +1,55 @@
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "query_string": {
+            "default_field": "wcs_logs.filename",
+            "query": "SystemOut.log"
+          }
+        },
+        {
+          "query_string": {
+            "default_field": "wcs_logs.host",
+            "query": "rftwwapp*"
+          }
+        },
+        {
+          "query_string": {
+            "default_field": "_all",
+            "query": "*CertPathValidatorException*"
+          }
+        },
+        {
+          "query_string": {
+            "default_field": "wcs_logs.t",
+            "query": "A"
+          }
+        },
+        {
+          "query_string": {
+            "default_field": "wcs_logs.component",
+            "query": "ConnectionEve"
+          }
+        },
+        {
+          "range": {
+            "wcs_logs.@timestamp": {
+              "from": "now-6h"
+            }
+          }
+        }
+      ],
+      "must_not": [],
+      "should": []
+    }
+  },
+  "from": 0,
+  "size": 10,
+  "sort": [],
+  "facets": {},
+  "fields": [
+    "host",
+    "path"
+  ]
+}

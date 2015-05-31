@@ -1,0 +1,164 @@
+{
+"took": 5634,
+"timed_out": false,
+"_shards": {
+"total": 85,
+"successful": 85,
+"failed": 0
+},
+"hits": {
+"total": 655,
+"max_score": 11.074519,
+"hits": [
+{
+"_index": "wcs_logs-2015.02.20",
+"_type": "wcs_logs",
+"_id": "AUunqrK5SlyYs5jF-1pp",
+"_score": 11.074519,
+"fields": {
+"path": [
+"/opt/IBM/WebSphere/AppServer/profiles/hbc/logs/PRBactHBCserver6/SystemOut.log"
+],
+"host": [
+"rftwwapp06.hbc.com"
+]
+}
+}
+,
+{
+"_index": "wcs_logs-2015.02.20",
+"_type": "wcs_logs",
+"_id": "AUunp6vzSlyYs5jF60tK",
+"_score": 11.074519,
+"fields": {
+"path": [
+"/opt/IBM/WebSphere/AppServer/profiles/hbc/logs/PRBactHBCserver6/SystemOut.log"
+],
+"host": [
+"rftwwapp06.hbc.com"
+]
+}
+}
+,
+{
+"_index": "wcs_logs-2015.02.20",
+"_type": "wcs_logs",
+"_id": "AUuniwVgSlyYs5jFjjhg",
+"_score": 11.074519,
+"fields": {
+"path": [
+"/opt/IBM/WebSphere/AppServer/profiles/hbc/logs/PRBactHBCserver6/SystemOut.log"
+],
+"host": [
+"rftwwapp06.hbc.com"
+]
+}
+}
+,
+{
+"_index": "wcs_logs-2015.02.20",
+"_type": "wcs_logs",
+"_id": "AUunj2CDSlyYs5jFlCCD",
+"_score": 11.074519,
+"fields": {
+"path": [
+"/opt/IBM/WebSphere/AppServer/profiles/hbc/logs/PRBactHBCserver6/SystemOut.log"
+],
+"host": [
+"rftwwapp06.hbc.com"
+]
+}
+}
+,
+{
+"_index": "wcs_logs-2015.02.20",
+"_type": "wcs_logs",
+"_id": "AUunj0BhSlyYs5jFk_db",
+"_score": 11.074519,
+"fields": {
+"path": [
+"/opt/IBM/WebSphere/AppServer/profiles/hbc/logs/PRBactHBCserver6/SystemOut.log"
+],
+"host": [
+"rftwwapp06.hbc.com"
+]
+}
+}
+,
+{
+"_index": "wcs_logs-2015.02.20",
+"_type": "wcs_logs",
+"_id": "AUunjzM-SlyYs5jFk-VL",
+"_score": 11.074519,
+"fields": {
+"path": [
+"/opt/IBM/WebSphere/AppServer/profiles/hbc/logs/PRBactHBCserver6/SystemOut.log"
+],
+"host": [
+"rftwwapp06.hbc.com"
+]
+}
+}
+,
+{
+"_index": "wcs_logs-2015.02.20",
+"_type": "wcs_logs",
+"_id": "AUunj_85SlyYs5jFlPbr",
+"_score": 11.074519,
+"fields": {
+"path": [
+"/opt/IBM/WebSphere/AppServer/profiles/hbc/logs/PRBactHBCserver6/SystemOut.log"
+],
+"host": [
+"rftwwapp06.hbc.com"
+]
+}
+}
+,
+{
+"_index": "wcs_logs-2015.02.20",
+"_type": "wcs_logs",
+"_id": "AUunertvSlyYs5jFd0yt",
+"_score": 11.074519,
+"fields": {
+"path": [
+"/opt/IBM/WebSphere/AppServer/profiles/hbc/logs/PRBactHBCserver6/SystemOut.log"
+],
+"host": [
+"rftwwapp06.hbc.com"
+]
+}
+}
+,
+{
+"_index": "wcs_logs-2015.02.20",
+"_type": "wcs_logs",
+"_id": "AUund-06SlyYs5jFc1ai",
+"_score": 11.074519,
+"fields": {
+"path": [
+"/opt/IBM/WebSphere/AppServer/profiles/hbc/logs/PRBactHBCserver6/SystemOut.log"
+],
+"host": [
+"rftwwapp06.hbc.com"
+]
+}
+}
+,
+{
+"_index": "wcs_logs-2015.02.20",
+"_type": "wcs_logs",
+"_id": "AUuneAruSlyYs5jFc4CF",
+"_score": 11.074519,
+"fields": {
+"path": [
+"/opt/IBM/WebSphere/AppServer/profiles/hbc/logs/PRBactHBCserver6/SystemOut.log"
+],
+"host": [
+"rftwwapp06.hbc.com"
+]
+}
+}
+]
+}
+}
