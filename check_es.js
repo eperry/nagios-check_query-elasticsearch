@@ -19,8 +19,9 @@ var http_password="nobody";
 var http_user="nobody";
 var warning_level=10000;
 var critical_level=100000;
-var config_filename="~/libexec/lib/check_demandware.d/etc/check_demandware.conf";
-var config;
+var index_name="_all";
+var search_filename="~/libexec/lib/check_es.d/etc/CertPathValidatorException.json";
+//var config;
 var orderStatus = {
     ordersExportToday :0,
     ordersReadyForExport :0,
@@ -91,7 +92,7 @@ var check_status = function check_status(jsonResponse){
     /***************
      * Check the status of the JSON Page
      ****************/
-     //console.info(JSON.stringify(jsonResponse,null, '\t'));
+     console.info(JSON.stringify(jsonResponse,null, '\t'));
      if (jsonResponse.hits.total > 0 ) {
         RET_STATUS.setStatus("CRITICAL");
         //var results=jsonResponse.hits.hits;
@@ -102,9 +103,14 @@ var check_status = function check_status(jsonResponse){
             //hostnames[results[i].fields.host[0]]++;
             //console.info(results[i].fields.host[0]+" -> "+results[i].fields.path[0]);
         //}
-        RET_STATUS.setMessage("Found "+jsonResponse.hits.total+" CertPathValidatorException errors "); 
+        RET_STATUS.setMessage("Found "+jsonResponse.hits.total+" Document Matches "); 
         
+     }else{
+        RET_STATUS.setStatus("OK");
+        RET_STATUS.setMessage("OK");
      }
+
+
 };
 
 /*********************************************************************
@@ -129,12 +135,9 @@ process.argv.forEach(function (val, index, array) {
         console.log("\t[--password=password] default: "+http_password);
         console.log("\t[--warning=#]         default: "+warning_level+" running time of a job in seconds (global)");
         console.log("\t[--critical=#]        default: "+critical_level+" running time of a job in seconds (global)");
-        console.log("\t[--config=<filename>  default: "+config_filename);
-        console.log("\t\t\tFormat of cfg file is in json format");
-        console.log('\t\t\t{');
-        console.log('\t\t\t\t "name": { "<nameoftheworkflow>", "warning": 1000, "critical": 2000 },');
-        console.log('\t\t\t\t{ "name":{ "<nameoftheworkflow>", "warning": 1000, "critical": 2000 }');
-        console.log('\t\t\t}');
+        console.log("\t[--search=<filename>  default: "+searchg_filename);
+        console.log("\t[--index=<indexname>   default: "+index_name);
+        console.log("\t\t\tFormat of cfg file is in json format, and is a ElasticSearch Format");
         RET_STATUS.message="HELP: Command";
         process.exit(RET_STATUS.STATUS.UNKNOWN)
     }
@@ -166,15 +169,19 @@ process.argv.forEach(function (val, index, array) {
         if (s[0] === "--proxy" ){
             http_proxy=s[1]
         }
-        if (s[0] === "--config"){
-            config_filename=s[1];
+        if (s[0] === "--index" ){
+            index_name=s[1]
+	    console.info("index_name="+index_name);
+        }
+        if (s[0] === "--search"){
+            search_filename=s[1];
             var fs = require('fs');
-            if (fs.existsSync(config_filename)) {
-                var fileContents = fs.readFileSync(config_filename,'utf8'); 
+            if (fs.existsSync(search_filename)) {
+                var fileContents = fs.readFileSync(search_filename,'utf8'); 
                 console.info(fileContents);
-                config = JSON.parse(fileContents);
+                //config = JSON.parse(fileContents);
             }else{
-                console.log("file does not exist:"+config_filename);
+                console.log("file does not exist:"+search_filename);
                 process.exit(RET_STATUS.STATUS.CRITICAL);
             }
         }
@@ -187,18 +194,20 @@ https_options.auth = 'Basic ' + new Buffer(http_user+":"+http_password).toString
  /***************
  * Fetch the site
  ****************/
- var useWGET=0;
+ var useWGET=1;
  if (useWGET){
-     var wget='wget -q -O -  --no-check-certificate  --user='+http_user+' --password='+http_password+' '+url;
-     var sys = require('sys')
+     //var wget='/usr/bin/curl -s --data @search-ssl.txt "http://rftelkp01.hbc.com:9200/'+index_name+'/_search?search_type=count" ';
+     var wget='/usr/bin/curl -s -XPOST --data @'+search_filename+' "http://rftelkp01.hbc.com:9200/'+index_name+'/_search" ';
+     console.info(wget);
+     var sys = require('sys');
      var exec = require('child_process').exec;
      var child;
       var jsonResponse="";
-      child = exec(wget, {env: {'http_proxy': http_proxy,'https_proxy' : http_proxy }},function (error, stdout, stderr) {
-        console.info(wget);
+      child = exec(wget, {},function (error, stdout, stderr) {
         console.info('exec error: ' + error);
         console.info('stdout: ' + stdout);
-        jsonResponse+=stdout;
+        //jsonResponse+=stdout;
+	jsonResponse = JSON.parse(stdout);
         eventEmitter.emit('check_status',jsonResponse);
       });
  }else{
